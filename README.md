@@ -1,4 +1,4 @@
-# Flower Classifier Web
+# Flower Classifier App
 Flower Classifier App is an image recognition app written in Python using Flask and PyTorch.
 
 The network state can be loaded from checkpoints saved after training on my [other repo here](https://github.com/gregdferrell/aipy-p1-image-classifier).
