@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Flower Classifier App is a web demo of a machine learning app.">
+    <meta name="author" content="gregdferrell">
+
+    <title>Flower Classifier App</title>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+    {# CSS #}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.7/c3.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    {# Javascript #}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/8129681b5a.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.6.7/c3.js"></script>
+
+    {% block head_scripts %}{% endblock %}
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark d-flex justify-content-around">
+            <div class="container">
+                <a class="navbar-brand" href="{{ url_for('index') }}">
+                    <span class="align-middle">Flower Classifier App</span>
+                </a>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('index') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('classify_test_images', images=3, predictions=5) }}">Test Images</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="main-section">
+        {% block page_detail %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <section class="container">
+            <p class="font-weight-light">Flower Classifier App is a web demo of a machine learning app. The source can be found <a href="https://github.com/gregdferrell/flower-classifier-web">on GitHub.</a></p>
+            <p class="font-weight-light">
+                Brought to you by <em>gregdferrell</em>
+                <a href="https://www.github.com/gregdferrell" target="_blank" class="footer-icon-link"><span
+                        class="fa fa-github fa-lg text-white" aria-hidden="true"></span></a>
+                <a href="https://www.linkedin.com/in/gregdferrell" target="_blank" class="footer-icon-link"><span
+                        class="fa fa-linkedin fa-lg text-white" aria-hidden="true"></span></a>
+            </p>
+        </section>
+    </footer>
+
+    <!-- Page End Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    {% block page_end_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,31 @@
+# python train.py flowers --gpu --epochs=6 --verbose --arch=vgg13
+Input args: Namespace(arch='vgg13', data_dir='flowers', dropout_rate=0.2, epochs=6, gpu=True, hidden_units=12544, learning_rate=0.0001, save_path
+='checkpoint.pth', verbose=True)
+Downloading: "https://download.pytorch.org/models/vgg13-c768596a.pth" to /root/.torch/models/vgg13-c768596a.pth
+100%|█████████████████████████████████████████████████████████████████████████████████████████| 532194478/532194478 [02:42<00:00, 3283721.06it/s]
+Training ...
+Epoch: 1/6..  Training Loss: 3.266..  Test Loss: 1.536..  Test Accuracy: 0.649
+Epoch: 1/6..  Training Loss: 1.698..  Test Loss: 0.776..  Test Accuracy: 0.787
+Epoch: 1/6..  Training Loss: 1.287..  Test Loss: 0.618..  Test Accuracy: 0.842
+Epoch: 2/6..  Training Loss: 0.728..  Test Loss: 0.535..  Test Accuracy: 0.858
+Epoch: 2/6..  Training Loss: 0.932..  Test Loss: 0.471..  Test Accuracy: 0.872
+Epoch: 2/6..  Training Loss: 0.795..  Test Loss: 0.497..  Test Accuracy: 0.878
+Epoch: 3/6..  Training Loss: 0.409..  Test Loss: 0.431..  Test Accuracy: 0.885
+Epoch: 3/6..  Training Loss: 0.631..  Test Loss: 0.375..  Test Accuracy: 0.903
+Epoch: 3/6..  Training Loss: 0.648..  Test Loss: 0.378..  Test Accuracy: 0.904
+Epoch: 4/6..  Training Loss: 0.211..  Test Loss: 0.334..  Test Accuracy: 0.905
+Epoch: 4/6..  Training Loss: 0.574..  Test Loss: 0.339..  Test Accuracy: 0.909
+Epoch: 4/6..  Training Loss: 0.594..  Test Loss: 0.314..  Test Accuracy: 0.913
+Epoch: 5/6..  Training Loss: 0.071..  Test Loss: 0.430..  Test Accuracy: 0.884
+Epoch: 5/6..  Training Loss: 0.500..  Test Loss: 0.298..  Test Accuracy: 0.919
+Epoch: 5/6..  Training Loss: 0.505..  Test Loss: 0.317..  Test Accuracy: 0.914
+Epoch: 5/6..  Training Loss: 0.514..  Test Loss: 0.313..  Test Accuracy: 0.911
+Epoch: 6/6..  Training Loss: 0.407..  Test Loss: 0.313..  Test Accuracy: 0.912
+Epoch: 6/6..  Training Loss: 0.512..  Test Loss: 0.311..  Test Accuracy: 0.916
+Epoch: 6/6..  Training Loss: 0.450..  Test Loss: 0.247..  Test Accuracy: 0.940
+Training complete.
+Testing network ...
+Test Loss: 0.307..  Test Accuracy: 0.920
+Testing complete.
+Saving checkpoint.
+Checkpoint saved to: checkpoint.pth.

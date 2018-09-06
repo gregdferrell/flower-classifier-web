@@ -1,0 +1,15 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <section id="messages" class="container">
+            <div class="row">
+                <div class="col">
+                    {% for category, message in messages %}
+                        <div class="flash-section alert alert-{{ category }}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+{% endwith %}

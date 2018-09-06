@@ -1,0 +1,40 @@
+{% extends "base_layout.html" %}
+
+{% block head_scripts %}
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+{% endblock %}
+
+{% block page_detail %}
+    {% include "show_flashed_messages.html" %}
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Test Images</h1>
+            <p class="lead text-muted">See flower classification predictions for a random sample of images from our test image dataset.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <section class="flower-list-section">
+                {% for file, classification in results %}
+                    <div class="row flower-item-section">
+                        <div class="col flower-image-section">
+                            <img class="flower-image center-crop" src="{{ url_for('static', filename=file) }}" alt="Flower Test Image" title="Flower Test Image">
+                        </div>
+                        <div class="col flower-results-section">
+                            <div id="chart{{ loop.index }}"></div>
+                            <script>
+                                let classNames{{ loop.index }} = {{ classification['class_names']|safe }};
+                                let probabilities{{ loop.index }} = {{ classification['probabilities']|safe }};
+								let chart{{ loop.index }} = getChart('chart{{ loop.index }}', classNames{{ loop.index }}, probabilities{{ loop.index }});
+                            </script>
+                        </div>
+                    </div>
+                {% else %}
+                    <p>There are no images to test.</p>
+                {% endfor %}
+            </section>
+        </div>
+    </section>
+{% endblock %}

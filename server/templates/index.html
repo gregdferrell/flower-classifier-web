@@ -1,0 +1,64 @@
+{% extends "base_layout.html" %}
+
+{% block page_detail %}
+    {% include "show_flashed_messages.html" %}
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">About</h1>
+            <p class="lead text-muted">Flower Classifier App is a demo of an image recognition neural network that classifies types of flowers.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h4>Summary</h4>
+            <p>This is a demo of an image recognition machine learning app that identifies flower classes from an image. The image datasets are from
+                <a href="http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html.">http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html.</a></p>
+            <p>See the neural network in action on a random sampling of flower images <a href="{{ url_for('classify_test_images', images=3, predictions=5) }}">here</a>.</p>
+
+            <h4>Network Architecture</h4>
+            <p>The example neural network in this demo was written and trained with <a href="https://pytorch.org/">PyTorch</a> (see the <a href="https://github.com/gregdferrell/aipy-p1-image-classifier">repo</a> where this network was trained). The network is based off the <a
+                    href="https://pytorch.org/docs/stable/torchvision/models.html">VGG13 model architecture</a>. Hyperparameters used in training:</p>
+            <ul>
+                <li>Learning Rate: 0.0001</li>
+                <li>Dropout Rate: 0.2</li>
+                <li>Classification Input Size: 25088</li>
+                <li>Classification Hidden Layers (1): 12544</li>
+                <li>Classification Output Size: 102</li>
+                <li>Criterion: <a href="https://pytorch.org/docs/stable/nn.html">nn.NLLLoss()</a></li>
+                <li>Epochs Trained: 6</li>
+            </ul>
+
+            <h4>Training & Testing Results</h4>
+            <p>During training, the network rapidly increased the correct prediction accuracy. It seemed to peek at around 6 epochs and 92-94% accuracy on the test dataset.</p>
+
+            <h5>Training Log</h5>
+            <p style="white-space: pre-line">Training ...
+                Epoch: 1/6..  Training Loss: 3.266..  Test Loss: 1.536..  Test Accuracy: 0.649
+                Epoch: 1/6..  Training Loss: 1.698..  Test Loss: 0.776..  Test Accuracy: 0.787
+                Epoch: 1/6..  Training Loss: 1.287..  Test Loss: 0.618..  Test Accuracy: 0.842
+                Epoch: 2/6..  Training Loss: 0.728..  Test Loss: 0.535..  Test Accuracy: 0.858
+                Epoch: 2/6..  Training Loss: 0.932..  Test Loss: 0.471..  Test Accuracy: 0.872
+                Epoch: 2/6..  Training Loss: 0.795..  Test Loss: 0.497..  Test Accuracy: 0.878
+                Epoch: 3/6..  Training Loss: 0.409..  Test Loss: 0.431..  Test Accuracy: 0.885
+                Epoch: 3/6..  Training Loss: 0.631..  Test Loss: 0.375..  Test Accuracy: 0.903
+                Epoch: 3/6..  Training Loss: 0.648..  Test Loss: 0.378..  Test Accuracy: 0.904
+                Epoch: 4/6..  Training Loss: 0.211..  Test Loss: 0.334..  Test Accuracy: 0.905
+                Epoch: 4/6..  Training Loss: 0.574..  Test Loss: 0.339..  Test Accuracy: 0.909
+                Epoch: 4/6..  Training Loss: 0.594..  Test Loss: 0.314..  Test Accuracy: 0.913
+                Epoch: 5/6..  Training Loss: 0.071..  Test Loss: 0.430..  Test Accuracy: 0.884
+                Epoch: 5/6..  Training Loss: 0.500..  Test Loss: 0.298..  Test Accuracy: 0.919
+                Epoch: 5/6..  Training Loss: 0.505..  Test Loss: 0.317..  Test Accuracy: 0.914
+                Epoch: 5/6..  Training Loss: 0.514..  Test Loss: 0.313..  Test Accuracy: 0.911
+                Epoch: 6/6..  Training Loss: 0.407..  Test Loss: 0.313..  Test Accuracy: 0.912
+                Epoch: 6/6..  Training Loss: 0.512..  Test Loss: 0.311..  Test Accuracy: 0.916
+                Epoch: 6/6..  Training Loss: 0.450..  Test Loss: 0.247..  Test Accuracy: 0.940
+                Training complete.
+                Testing network ...
+                Test Loss: 0.307..  Test Accuracy: 0.920
+                Testing complete.
+            </p>
+        </div>
+    </section>
+{% endblock %}
