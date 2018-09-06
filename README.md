@@ -32,3 +32,9 @@ The network state can be loaded from checkpoints saved after training on my [oth
 
 ## Running the App
 - Execute `python app.py`
+
+## TODO
+- Add form inputs for num images/predictions on test images page
+- Add upload image page
+- Improve test image responsiveness
+- Improve C3 graphs

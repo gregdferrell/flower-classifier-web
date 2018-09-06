@@ -12,21 +12,31 @@
 
     <section>
         <div class="container">
-            <h4>Summary</h4>
-            <p>This is a demo of an image recognition machine learning app that identifies flower classes from an image. The image datasets are from
-                <a href="http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html.">http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html.</a></p>
-            <p>See the neural network in action on a random sampling of flower images <a href="{{ url_for('classify_test_images', images=3, predictions=5) }}">here</a>.</p>
+            <div id="index-summary" class="row">
+                <div class="col-md-8">
+                    <h4>Summary</h4>
+                    <p>This is a demo of an image recognition neural network that classifies types of flowers from an image. The image datasets are from
+                        <a href="http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html.">http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html.</a></p>
+                    <p>See the neural network in action on a random sampling of flower images <a href="{{ url_for('classify_test_images', images=3, predictions=5) }}">here</a>.</p>
+                </div>
+                <div class="col-md-4">
+                    <img class="flower-image w300" src="{{ url_for('static', filename=file) }}" alt="Flower Test Image" title="Flower Test Image">
+                </div>
+            </div>
 
             <h4>Network Architecture</h4>
-            <p>The example neural network in this demo was written and trained with <a href="https://pytorch.org/">PyTorch</a> (see the <a href="https://github.com/gregdferrell/aipy-p1-image-classifier">repo</a> where this network was trained). The network is based off the <a
-                    href="https://pytorch.org/docs/stable/torchvision/models.html">VGG13 model architecture</a>. Hyperparameters used in training:</p>
+            <p>The example neural network in this demo was written and trained with <a href="https://pytorch.org/">PyTorch</a> (see the <a href="https://github.com/gregdferrell/aipy-p1-image-classifier">repo</a> that was used to train this network). The network is based off the <a
+                    href="https://pytorch.org/docs/stable/torchvision/models.html#torchvision.models.vgg13">VGG13 model architecture</a>. Hyperparameters used in training:</p>
             <ul>
                 <li>Learning Rate: 0.0001</li>
                 <li>Dropout Rate: 0.2</li>
+                <li>Optimizer: <a href="https://pytorch.org/docs/stable/optim.html#torch.optim.Adam">torch.optim.Adam</a></li>
+                <li>Criterion: <a href="https://pytorch.org/docs/stable/nn.html#torch.nn.NLLLoss">torch.nn.NLLLoss</a></li>
                 <li>Classification Input Size: 25088</li>
                 <li>Classification Hidden Layers (1): 12544</li>
+                <li>Classification Activation Function: <a href="https://pytorch.org/docs/stable/nn.html#torch.nn.ReLU">torch.nn.ReLU</a></li>
                 <li>Classification Output Size: 102</li>
-                <li>Criterion: <a href="https://pytorch.org/docs/stable/nn.html">nn.NLLLoss()</a></li>
+                <li>Classification Output Function: <a href="https://pytorch.org/docs/stable/nn.html#torch.nn.LogSoftmax">torch.nn.LogSoftmax</a></li>
                 <li>Epochs Trained: 6</li>
             </ul>
 

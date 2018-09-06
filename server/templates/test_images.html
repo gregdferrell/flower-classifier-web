@@ -20,7 +20,7 @@
                 {% for file, classification in results %}
                     <div class="row flower-item-section">
                         <div class="col flower-image-section">
-                            <img class="flower-image center-crop" src="{{ url_for('static', filename=file) }}" alt="Flower Test Image" title="Flower Test Image">
+                            <img class="flower-image w400" src="{{ url_for('static', filename=file) }}" alt="Flower Test Image" title="Flower Test Image">
                         </div>
                         <div class="col flower-results-section">
                             <div id="chart{{ loop.index }}"></div>

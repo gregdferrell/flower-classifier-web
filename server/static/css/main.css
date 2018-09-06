@@ -11,8 +11,6 @@
 	background-size: cover;
 	border-radius: 4px;
 	display: inline-block;
-	height: 400px;
-	width: 400px;
 }
 
 .flower-image-section {
@@ -21,10 +19,6 @@
 
 .flower-item-section {
 	margin: 1rem 0 1rem;
-}
-
-.flower-results-section {
-
 }
 
 .footer {
@@ -61,8 +55,26 @@
 	font-weight: 300;
 }
 
+.w400 {
+	width: 400px;
+}
+
+.w300 {
+	width: 300px;
+}
+
 #messages {
     margin-top: 2rem;
+}
+
+/*
+ * Screen width < 768 px
+ */
+
+@media (max-width: 767px) {
+	#index-summary {
+		margin-bottom: 1rem;
+	}
 }
 
 /*

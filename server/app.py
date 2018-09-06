@@ -37,7 +37,8 @@ nw = Network(arch=NetworkArchitectures.VGG13,
 
 @app.route('/', methods=['GET'])
 def index():
-	return render_template('index.html')
+	files, file_urls = get_images_random_sampling(1)
+	return render_template('index.html', file=file_urls[0])
 
 
 @app.route('/test_images', methods=['GET'])
@@ -55,21 +56,11 @@ def classify_test_images():
 		num_predictions = 10
 
 	# Get all images, full paths & links
-	files_path = path.join('static', 'img', 'test', '**/*.jpg')
-	files = glob.glob(files_path, recursive=True)
+	files, file_urls = get_images_random_sampling(num_images)
+	classifications = [classify(file, num_predictions) for file in files]
 
-	classifications = []
-	if files:
-		# Select random sample of flower images
-		files = random.sample(files, num_images)
+	return render_template('test_images.html', results=zip(file_urls, classifications))
 
-		# Classify each image
-		classifications = [classify(file, num_predictions) for file in files]
-
-		# Remove prefix 'static' & update file paths to URLs
-		files = [file[len('static/'):].replace('\\', '/') for file in files]
-
-	return render_template('test_images.html', results=zip(files, classifications))
 
 # TODO Complete
 # @app.route('/upload', methods=['POST'])
@@ -100,6 +91,12 @@ def classify_test_images():
 
 
 def classify(image_file, top_matches: int):
+	"""
+	Uses the neural net to classify the given image
+	:param image_file: the path to the image file
+	:param top_matches: the number of predictions to return
+	:return: a dict containing lists of class names, class ids and probabilities
+	"""
 	# Use network to get top predictions
 	category_name_list, class_id_list, probabilities_list = nw.predict(image_file, top_matches)
 	return {
@@ -107,6 +104,36 @@ def classify(image_file, top_matches: int):
 		'class_ids': class_id_list,
 		'probabilities': probabilities_list
 	}
+
+
+def convert_file_path_to_url(file):
+	"""
+	Gets a file url given a path to an image file.
+	:param file: the path to the image file
+	:return: a URL friendly string that Flask can use to link to the image
+	"""
+	# Remove static prefix and update file path separators to URL style
+	file = file[len('static/'):].replace('\\', '/')
+	return file
+
+
+def get_images_random_sampling(num_images: int):
+	"""
+	Gets a random sampling of images from the test dataset.
+	:param num_images: the number of images to get
+	:return: a tuple containing the [0]file paths (to be used in classification) and [1]file urls (to be used by flask for showing the images)
+	"""
+	# Get all images, full paths & links
+	files_path = path.join('static', 'img', 'test', '**/*.jpg')
+	files = glob.glob(files_path, recursive=True)
+
+	# Select random sample of flower images
+	files = random.sample(files, num_images)
+
+	# Remove prefix 'static' & update file paths to URLs
+	file_urls = [file[len('static/'):].replace('\\', '/') for file in files]
+
+	return files, file_urls
 
 
 if __name__ == '__main__':
