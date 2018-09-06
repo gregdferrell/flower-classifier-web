@@ -5,7 +5,7 @@ import glob
 import random
 from os import path
 
-from flask import Flask, jsonify, render_template, request, flash
+from flask import Flask, flash, render_template, request
 from torch import nn
 
 # Constants
@@ -71,7 +71,7 @@ def classify_test_images():
 
 	return render_template('test_images.html', results=zip(files, classifications))
 
-
+# TODO Complete
 # @app.route('/upload', methods=['POST'])
 # def classify_upload_image():
 # 	# Get params from form
@@ -107,13 +107,6 @@ def classify(image_file, top_matches: int):
 		'class_ids': class_id_list,
 		'probabilities': probabilities_list
 	}
-
-	# Populate and return results list
-	# results = []
-	# for category, class_id, probability in zip(category_name_list, class_id_list, probabilities_list):
-	# 	results.append({'class_name': category, 'class_id': class_id, 'probability': probability * 100})
-	#
-	# return results
 
 
 if __name__ == '__main__':
