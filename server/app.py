@@ -8,9 +8,9 @@ from os import path
 from flask import Flask, flash, render_template, request
 from torch import nn
 
-# Constants
 from server.flower_neural_net import Network, NetworkArchitectures
 
+# Constants
 CATEGORY_TO_NAME_JSON = 'cat_to_name.json'
 CLASS_TO_INDEX_JSON = 'class_to_index.json'
 CHECKPOINT_PATH = 'checkpoint.pth'
