@@ -6,6 +6,14 @@
 	--jumbotron-padding-y: 2rem;
 }
 
+.chart {
+	margin: .5rem;
+	max-width: 600px;
+	min-width: 300px;
+	text-align: center;
+	width: 100%;
+}
+
 .flower-image {
 	background-position: center center;
 	background-size: cover;
@@ -14,11 +22,15 @@
 }
 
 .flower-image-section {
-	text-align: right;
+	text-align: center;
 }
 
 .flower-item-section {
 	margin: 1rem 0 1rem;
+}
+
+.flower-results-section {
+	text-align: center;
 }
 
 .footer {
@@ -34,6 +46,10 @@
 
 .footer-icon-link {
 	margin: 0 0.5rem 0;
+}
+
+#index-summary {
+	margin-bottom: 1rem;
 }
 
 .jumbotron {
@@ -64,26 +80,38 @@
 }
 
 #messages {
-    margin-top: 2rem;
+	margin-top: 2rem;
 }
 
-/*
- * Screen width < 768 px
- */
+/*               */
+/*               */
+/* MEDIA QUERIES */
+/*               */
+/*               */
 
-@media (max-width: 767px) {
-	#index-summary {
-		margin-bottom: 1rem;
-	}
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+
 }
 
-/*
- * Screen width >= 768 px
- */
-
+/* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+	#index-summary {
+		margin-bottom: 0;
+	}
+
 	.jumbotron {
 		padding-bottom: calc(var(--jumbotron-padding-y) * 2);
 		padding-top: calc(var(--jumbotron-padding-y) * 2);
 	}
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
 }

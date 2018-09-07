@@ -6,7 +6,7 @@ function getChart(elementId, classNames, probabilities) {
 	return c3.generate({
 		bindto: '#' + elementId,
 		size: {
-			width: 580
+			// width: 580
 		},
 		axis: {
 			rotated: true,

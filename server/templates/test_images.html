@@ -16,6 +16,25 @@
 
     <section>
         <div class="container">
+            <form action="{{ url_for('classify_test_images') }}" method="get" >
+                <div class="form-row">
+                    <div class="col-4"></div>
+                    <div class="col-2 form-group text-center">
+                        <label for="num-images">#Flowers</label>
+                        <input id="num-images" class="form-control" name="images" value="{{ num_images }}">
+                    </div>
+                    <div class="col-2 form-group text-center">
+                        <label for="num-predictions">#Predictions</label>
+                        <input id="num-predictions" class="form-control" name="predictions" value="{{ num_predictions }}">
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-primary">Refresh</button>
+                    </div>
+                </div>
+            </form>
             <section class="flower-list-section">
                 {% for file, classification in results %}
                     <div class="row flower-item-section">
@@ -23,7 +42,7 @@
                             <img class="flower-image w400" src="{{ url_for('static', filename=file) }}" alt="Flower Test Image" title="Flower Test Image">
                         </div>
                         <div class="col flower-results-section">
-                            <div id="chart{{ loop.index }}"></div>
+                            <div id="chart{{ loop.index }}" class="chart"></div>
                             <script>
                                 let classNames{{ loop.index }} = {{ classification['class_names']|safe }};
                                 let probabilities{{ loop.index }} = {{ classification['probabilities']|safe }};
