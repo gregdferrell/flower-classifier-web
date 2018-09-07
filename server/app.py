@@ -22,23 +22,29 @@ app.config['MAX_CONTENT_LENGTH'] = 2048 * 1024  # 2048KB, ~2MB
 
 # Load the network from the checkpoint
 nw = Network(arch=NetworkArchitectures.VGG13,
-			learning_rate=0.0001,
-			dropout_rate=0.2,
-			input_size=25088,
-			hidden_units=(12544,),
-			output_size=102,
-			criterion=nn.NLLLoss(),
-			epochs=6,
-			state_dict_checkpoint_path=CHECKPOINT_PATH,
-			class_to_index_json_path=CLASS_TO_INDEX_JSON,
-			category_to_name_json_path=CATEGORY_TO_NAME_JSON,
-			gpu=False)
+			 learning_rate=0.0001,
+			 dropout_rate=0.2,
+			 input_size=25088,
+			 hidden_units=(12544,),
+			 output_size=102,
+			 criterion=nn.NLLLoss(),
+			 epochs=6,
+			 state_dict_checkpoint_path=CHECKPOINT_PATH,
+			 class_to_index_json_path=CLASS_TO_INDEX_JSON,
+			 category_to_name_json_path=CATEGORY_TO_NAME_JSON,
+			 gpu=False)
 
 
 @app.route('/', methods=['GET'])
 def index():
 	files, file_urls = get_images_random_sampling(1)
 	return render_template('index.html', file=file_urls[0])
+
+
+@app.route('/flower_categories', methods=['GET'])
+def flower_categories():
+	categories = sorted([cat.title() for cat in list(nw.cat_to_name.values())])
+	return render_template('flower_categories.html', categories=categories)
 
 
 @app.route('/test_images', methods=['GET'])
@@ -60,11 +66,15 @@ def classify_test_images():
 	classifications = [classify(file, num_predictions) for file in files]
 
 	return render_template('test_images.html', results=zip(file_urls, classifications),
-						num_images=num_images,
-						num_predictions=num_predictions)
+						   num_images=num_images,
+						   num_predictions=num_predictions)
 
 
-# TODO Complete
+@app.route('/upload_image', methods=['GET'])
+def get_upload_image():
+	return render_template('upload_image.html')
+
+
 # @app.route('/upload', methods=['POST'])
 # def classify_upload_image():
 # 	# Get params from form

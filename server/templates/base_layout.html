@@ -37,7 +37,13 @@
                         <a class="nav-link" href="{{ url_for('index') }}">About</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('flower_categories') }}">Flower Categories</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('classify_test_images', images=3, predictions=5) }}">Test Images</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('get_upload_image') }}">Upload Image</a>
                     </li>
                 </ul>
             </div>

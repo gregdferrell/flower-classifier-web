@@ -15,9 +15,12 @@
             <div id="index-summary" class="row">
                 <div class="col-md-8">
                     <h4>Summary</h4>
-                    <p>This is a demo of an image recognition neural network that classifies types of flowers from an image. The image datasets are from
-                        <a href="http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html.">http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html.</a></p>
-                    <p>See the neural network in action on a random sampling of flower images <a href="{{ url_for('classify_test_images', images=3, predictions=5) }}">here</a>.</p>
+                    <p>This is a demo of an image recognition neural network that classifies types of flowers. The image datasets are from
+                        <a href="http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html" target="_blank">http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html</a>.
+                        There are <a href="{{ url_for('flower_categories') }}">102 flower categories</a> in the dataset.</p>
+                    <p><a href="{{ url_for('classify_test_images', images=3, predictions=5) }}">See the neural network in action</a> on a random sampling of
+                        flower images from our test dataset.</p>
+                    <p>Or, <a href="{{ url_for('get_upload_image') }}">upload your own image</a>, and see what our classifier thinks.</p>
                 </div>
                 <div class="col-md-4">
                     <img class="flower-image w300" src="{{ url_for('static', filename=file) }}" alt="Flower Test Image" title="Flower Test Image">
@@ -25,8 +28,11 @@
             </div>
 
             <h4>Network Architecture</h4>
-            <p>The example neural network in this demo was written and trained with <a href="https://pytorch.org/">PyTorch</a> (see the <a href="https://github.com/gregdferrell/aipy-p1-image-classifier">repo</a> that was used to train this network). The network is based off the <a
-                    href="https://pytorch.org/docs/stable/torchvision/models.html#torchvision.models.vgg13">VGG13 model architecture</a>. Hyperparameters used in training:</p>
+            <p>The example neural network in this demo was written and trained with <a href="https://pytorch.org/">PyTorch</a> (see the <a
+                    href="https://github.com/gregdferrell/aipy-p1-image-classifier">repo</a> that was used to train this network). The network is based off the
+                <a
+                        href="https://pytorch.org/docs/stable/torchvision/models.html#torchvision.models.vgg13">VGG13 model architecture</a>. Hyperparameters
+                used in training:</p>
             <ul>
                 <li>Learning Rate: 0.0001</li>
                 <li>Dropout Rate: 0.2</li>
@@ -41,7 +47,8 @@
             </ul>
 
             <h4>Training & Testing Results</h4>
-            <p>During training, the network rapidly increased the correct prediction accuracy. It seemed to peak at around 6 epochs and 92-94% accuracy on the test dataset.</p>
+            <p>During training, the network rapidly increased the correct prediction accuracy. It seemed to peak at around 6 epochs and 92-94% accuracy on the
+                test dataset.</p>
 
             <h5>Training Log</h5>
             <p style="white-space: pre-line">Training ...

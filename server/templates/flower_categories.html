@@ -1,0 +1,25 @@
+{% extends "base_layout.html" %}
+
+{% block page_detail %}
+    {% include "show_flashed_messages.html" %}
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">102 Flower Categories</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div id="flower-categories-summary" class="row">
+                <div class="row">
+                    {% for category in categories %}
+                        <div class="col-lg-2 col-md-3 col-sm-6 text-center">
+                            <p>{{ category }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

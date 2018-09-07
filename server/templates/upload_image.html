@@ -1,0 +1,60 @@
+{% extends "base_layout.html" %}
+
+{% block page_detail %}
+    {% include "show_flashed_messages.html" %}
+
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">Upload Image</h1>
+            <p class="lead text-muted">Upload your own image and see what our classifier thinks.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <section class="upload-image-section">
+                <form action="{{ url_for('classify_upload_image') }}" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-5"></div>
+                        <div class="col-2">
+                            <input style="width: 100px; margin: auto;" type="file" name="flower-image" class="form-control-file" id="image-upload" accept="image/png, image/jpeg">
+                        </div>
+                        <div class="col-5"></div>
+                    </div>
+                    <small class="form-text text-muted">Image cannot exceed 2 MB.</small>
+                    <img id="image-show" class="flower-image w400" src="#" style="display: none; max-width: 400px;"/>
+                </form>
+            </section>
+            {% if result %}
+                <section class="upload-image-result-section">
+                    <header>
+                        <h4>Result</h4>
+                    </header>
+                </section>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}
+
+{% block page_end_scripts %}
+    <script>
+        $(document).ready(function() {
+            $("#image-upload").change(function () {
+                readURL(this);
+                $("#image-show").show();
+            });
+        });
+
+        // Ref: https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+
+                reader.onload = function (e) {
+                    document.getElementById('image-show').src=e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+{% endblock %}

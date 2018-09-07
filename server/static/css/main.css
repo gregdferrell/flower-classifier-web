@@ -71,16 +71,21 @@
 	font-weight: 300;
 }
 
+#messages {
+	margin-top: 2rem;
+}
+
+.upload-image-section {
+	margin-bottom: 2rem;
+	text-align: center;
+}
+
 .w400 {
 	width: 400px;
 }
 
 .w300 {
 	width: 300px;
-}
-
-#messages {
-	margin-top: 2rem;
 }
 
 /*               */
