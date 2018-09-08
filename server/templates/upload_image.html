@@ -1,5 +1,9 @@
 {% extends "base_layout.html" %}
 
+{% block head_scripts %}
+    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+{% endblock %}
+
 {% block page_detail %}
     {% include "show_flashed_messages.html" %}
 
@@ -13,16 +17,32 @@
     <section>
         <div class="container">
             <section class="upload-image-section">
-                <form action="{{ url_for('classify_upload_image') }}" method="post" enctype="multipart/form-data">
+                <form enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-5"></div>
                         <div class="col-2">
-                            <input style="width: 100px; margin: auto;" type="file" name="flower-image" class="form-control-file" id="image-upload" accept="image/png, image/jpeg">
+                            <input style="width: 100px; margin: auto;" type="file" name="flower-image" class="form-control-file" id="image-upload"
+                                   accept="image/jpeg">
                         </div>
                         <div class="col-5"></div>
                     </div>
-                    <small class="form-text text-muted">Image cannot exceed 2 MB.</small>
-                    <img id="image-show" class="flower-image w400" src="#" style="display: none; max-width: 400px;"/>
+
+                    <div>
+                        <small class="form-text text-muted">Image must be a jpg and cannot exceed 1 MB.</small>
+                    </div>
+
+                    <div class="row flower-item-section">
+                        <div class="col flower-image-section">
+                            <img id="image-show" class="flower-image w400" src="#" style="display: none"/>
+                        </div>
+                        <div class="col flower-results-section">
+                            <div id="error-classify" class="flash-section alert alert-danger" role="alert" style="display: none;">
+                                Error classifying image.
+                            </div>
+                            <div id="chart" class="chart"></div>
+                        </div>
+                    </div>
+
                 </form>
             </section>
             {% if result %}
@@ -38,23 +58,63 @@
 
 {% block page_end_scripts %}
     <script>
-        $(document).ready(function() {
-            $("#image-upload").change(function () {
-                readURL(this);
-                $("#image-show").show();
-            });
-        });
+		$(document).ready(function () {
+			$("#image-upload").change(function () {
+				$("#image-show").hide();
+                $("#error-classify").hide();
+				$("#chart").hide();
 
-        // Ref: https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                let reader = new FileReader();
+				let file = this.files[0];
+				if (file == null || file.size > 1024 * 1024) { // 1024KB, ~1MB
+					alert('Max file size allowed is 1MB.');
+                    return;
+				}
 
-                reader.onload = function (e) {
-                    document.getElementById('image-show').src=e.target.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
+				showImage(this);
+				$("#image-show").show();
+
+				$.ajax({
+					type: 'POST',
+					url: '/classify_upload_image',
+					data: new FormData($('form')[0]),
+					cache: false,
+					contentType: false,
+					processData: false,
+					success: function (result) {
+						if (result) {
+							console.log('Successfully classified image.');
+							classificationSuccess(result);
+						} else {
+							classificationFailure();
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						classificationFailure();
+					}
+				});
+			});
+		});
+
+		function showImage(input) {
+			if (input.files && input.files[0]) {
+				let reader = new FileReader();
+
+				reader.onload = function (e) {
+					document.getElementById('image-show').src = e.target.result;
+				};
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		function classificationSuccess(result) {
+			let classNames = result['class_names'];
+			let probabilities = result['probabilities'];
+			let chart = getChart('chart', classNames, probabilities);
+			$("#chart").show();
+		}
+
+		function classificationFailure() {
+            $("#error-classify").show();
         }
     </script>
 {% endblock %}

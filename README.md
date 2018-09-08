@@ -34,7 +34,5 @@ The network state can be loaded from checkpoints saved after training on my [oth
 - Execute `python app.py`
 
 ## TODO
-- Add upload image page
 - Improve C3 graphs
   - Can't see bars < 2%
-  - Responsiveness on page

@@ -5,7 +5,7 @@ import glob
 import random
 from os import path
 
-from flask import Flask, flash, render_template, request
+from flask import Flask, flash, jsonify, render_template, request
 from torch import nn
 
 from server.flower_neural_net import Network, NetworkArchitectures
@@ -18,7 +18,7 @@ CHECKPOINT_PATH = 'checkpoint.pth'
 # Configure Flask
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-app.config['MAX_CONTENT_LENGTH'] = 2048 * 1024  # 2048KB, ~2MB
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024  # 1024KB, ~1MB
 
 # Load the network from the checkpoint
 nw = Network(arch=NetworkArchitectures.VGG13,
@@ -75,31 +75,28 @@ def get_upload_image():
 	return render_template('upload_image.html')
 
 
-# @app.route('/upload', methods=['POST'])
-# def classify_upload_image():
-# 	# Get params from form
-# 	top_matches = request.form.get('top-matches', 5)
-#
-# 	# Get the attached file if present
-# 	file = None
-# 	if 'flower-image' in request.files:
-# 		if request.files.get('flower-image').filename:
-# 			file = request.files['flower-image']
-#
-# 	# Validate presence of image file
-# 	if file is None:
-# 		bad_request_response_code = 400
-# 		message = {
-# 			'status': bad_request_response_code,
-# 			'message': "You forgot to attach a file!",
-# 			'url': request.url
-# 		}
-#
-# 		return jsonify(message), bad_request_response_code
-#
-# 	classification = classify(file, top_matches)
-#
-# 	return jsonify(classification)
+@app.route('/classify_upload_image', methods=['POST'])
+def classify_upload_image():
+	# Get the attached file if present
+	file = None
+	if 'flower-image' in request.files:
+		if request.files.get('flower-image').filename:
+			file = request.files['flower-image']
+
+	# Validate presence of image file
+	if file is None:
+		bad_request_response_code = 400
+		message = {
+			'status': bad_request_response_code,
+			'message': "You forgot to attach a file!",
+			'url': request.url
+		}
+
+		return jsonify(message), bad_request_response_code
+
+	classification = classify(file, 5)
+
+	return jsonify(classification)
 
 
 def classify(image_file, top_matches: int):
