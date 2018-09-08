@@ -5,9 +5,6 @@ function getChart(elementId, classNames, probabilities) {
 
 	return c3.generate({
 		bindto: '#' + elementId,
-		size: {
-			// width: 580
-		},
 		axis: {
 			rotated: true,
 			x: {
@@ -50,4 +47,28 @@ function getChart(elementId, classNames, probabilities) {
 			}
 		},
 	})
+}
+
+function getPieChart(elementId, classNames, probabilities) {
+	let pieDataArray = [];
+	for (let i = 0; i < classNames.length; i++) {
+		pieDataArray.push([classNames[i], probabilities[i]])
+	}
+
+	return c3.generate({
+		bindto: '#' + elementId,
+		data: {
+			columns: pieDataArray,
+			type: 'pie',
+			onclick: function (d, i) {
+				console.log("onclick", d, i);
+			},
+			onmouseover: function (d, i) {
+				console.log("onmouseover", d, i);
+			},
+			onmouseout: function (d, i) {
+				console.log("onmouseout", d, i);
+			}
+		}
+	});
 }
