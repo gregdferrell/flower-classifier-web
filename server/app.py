@@ -1,7 +1,9 @@
 #
 # Flask app exposing access to flower recognition neural network.
 #
+import configparser
 import glob
+import os
 import random
 from os import path
 
@@ -10,10 +12,15 @@ from torch import nn
 
 from server.flower_neural_net import Network, NetworkArchitectures
 
+# Load Configuration
+app_config = configparser.ConfigParser()
+app_config.read(os.path.join(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'app_config.ini')))
+
 # Constants
 CATEGORY_TO_NAME_JSON = 'cat_to_name.json'
 CLASS_TO_INDEX_JSON = 'class_to_index.json'
 CHECKPOINT_PATH = 'checkpoint.pth'
+CHECKPOINT_DOWNLOAD_PATH = app_config['DEFAULT']['state.dict.download.url']
 
 # Configure Flask
 app = Flask(__name__)
@@ -30,6 +37,7 @@ nw = Network(arch=NetworkArchitectures.VGG13,
 			 criterion=nn.NLLLoss(),
 			 epochs=6,
 			 state_dict_checkpoint_path=CHECKPOINT_PATH,
+			 state_dict_checkpoint_download_path=CHECKPOINT_DOWNLOAD_PATH,
 			 class_to_index_json_path=CLASS_TO_INDEX_JSON,
 			 category_to_name_json_path=CATEGORY_TO_NAME_JSON,
 			 gpu=False)
@@ -147,5 +155,5 @@ def get_images_random_sampling(num_images: int):
 
 if __name__ == '__main__':
 	app.debug = True
-	app.secret_key = 'RANDOMKEY!'
+	app.secret_key = 'SECRET'  # TODO Add secret key
 	app.run(host='localhost', port=8000)

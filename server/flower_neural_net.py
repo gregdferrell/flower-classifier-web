@@ -3,6 +3,9 @@
 #
 
 import json
+import os.path
+import shutil
+import urllib.request
 from collections import OrderedDict
 from enum import Enum
 from typing import Tuple
@@ -43,6 +46,7 @@ class Network:
 				 criterion,
 				 epochs: int,
 				 state_dict_checkpoint_path: str,
+				 state_dict_checkpoint_download_path: str,
 				 class_to_index_json_path: str,
 				 category_to_name_json_path: str,
 				 gpu: bool):
@@ -57,6 +61,7 @@ class Network:
 		:param criterion: function to calculate loss
 		:param epochs: the number of epochs this network has been trained
 		:param state_dict_checkpoint_path: path to state dict checkpoint file
+		:param state_dict_checkpoint_download_path: path to download location for state dict checkpoint file
 		:param class_to_index_json_path: path to class to index json file
 		:param category_to_name_json_path: path to category to name json file
 		:param gpu: boolean indicating to use gpu or not
@@ -88,6 +93,14 @@ class Network:
 
 		# Load state dict from pre-trained model
 		device_map_location = "cuda:0" if self.gpu and torch.cuda.is_available() else "cpu"
+
+		# If checkpoint file does not exist, download and save it
+		if not os.path.isfile(state_dict_checkpoint_path):
+			with urllib.request.urlopen(state_dict_checkpoint_download_path) as response, \
+					open(state_dict_checkpoint_path, 'wb') as out_file:
+				shutil.copyfileobj(response, out_file)
+
+		# Load checkpoint
 		state_dict = torch.load(state_dict_checkpoint_path, map_location=device_map_location)
 		self.model.load_state_dict(state_dict)
 
