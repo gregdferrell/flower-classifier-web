@@ -1,4 +1,4 @@
-// Return a C3 chart object
+// Return a C3 bar chart object
 function getChart(elementId, classNames, probabilities) {
 	classNames.unshift('class');
 	probabilities.unshift('probability');
@@ -49,6 +49,7 @@ function getChart(elementId, classNames, probabilities) {
 	})
 }
 
+// Return a C3 pie chart object
 function getPieChart(elementId, classNames, probabilities) {
 	let pieDataArray = [];
 	for (let i = 0; i < classNames.length; i++) {
@@ -59,16 +60,7 @@ function getPieChart(elementId, classNames, probabilities) {
 		bindto: '#' + elementId,
 		data: {
 			columns: pieDataArray,
-			type: 'pie',
-			onclick: function (d, i) {
-				console.log("onclick", d, i);
-			},
-			onmouseover: function (d, i) {
-				console.log("onmouseover", d, i);
-			},
-			onmouseout: function (d, i) {
-				console.log("onmouseout", d, i);
-			}
+			type: 'pie'
 		}
 	});
 }
