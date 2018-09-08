@@ -4,9 +4,6 @@
 # Trained network checkpoint file
 server/checkpoint.pth
 
-# Test images
-server/static/img/test
-
 # Config file
 server/app_config.ini
 

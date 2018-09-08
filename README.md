@@ -28,7 +28,6 @@ The network state can be loaded from checkpoints saved after training on my [oth
     ```
 - Train the flower recognition neural network on my [other repo here](https://github.com/gregdferrell/aipy-p1-image-classifier) and save a checkpoint (model state dict only) for the trained network.
   - Then instantiate your network here using the same hyperparameters you used when training.
-- Download test images from [this dataset](http://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html) and place the `test` image folder under `static\img\test`.
 - Copy `app_config_template.ini` to `app_config.ini` and fill in properties for your env
 
 ## Running the App
