@@ -17,7 +17,7 @@ The network state can be loaded from checkpoints saved after training on my [oth
 - Create a model state dict that your network will load on startup.
   - You can train a network using my [network training repo here](https://github.com/gregdferrell/aipy-p1-image-classifier).
     - Save a checkpoint (model state dict only) after training.
-  - Then update your local `app.py` (if needed) to instantiate your network using the same hyperparameters used when training the network checkpoint you will load.
+  - Then update your local `app.py` (if needed) to instantiate your network using the same hyperparameters used when training your network.
 - Copy `app_config_template.ini` to `app_config.ini` and fill in properties for your env (see descriptions below).
 
 #### Properties: `app_config_template.ini`
