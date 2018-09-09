@@ -19,7 +19,7 @@ app_config.read(os.path.join(os.path.join(os.path.abspath(os.path.dirname(__file
 # Constants
 CATEGORY_TO_NAME_JSON = 'cat_to_name.json'
 CLASS_TO_INDEX_JSON = 'class_to_index.json'
-CHECKPOINT_PATH = 'checkpoint.pth'
+CHECKPOINT_PATH = app_config['DEFAULT']['state.dict.file.path']
 CHECKPOINT_DOWNLOAD_PATH = app_config['DEFAULT']['state.dict.download.url']
 
 # Configure Flask
