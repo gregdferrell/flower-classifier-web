@@ -1,4 +1,4 @@
-# Server Setup
+# Operations
 This guide describes how to serve this application using Gunicorn and Nginx on Ubuntu 16.04.
 
 Thanks to [Digital Ocean's tutorial here](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-16-04) for some of the basic setup steps.
