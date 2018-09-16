@@ -155,4 +155,5 @@ def get_images_random_sampling(num_images: int):
 
 if __name__ == '__main__':
 	app.debug = True
+	app.secret_key = 'TODO:CHANGE-SECRET-KEY!'
 	app.run(host='localhost', port=8000)
