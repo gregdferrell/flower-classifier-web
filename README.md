@@ -7,6 +7,7 @@ The network state can be loaded from checkpoints saved after training using my [
 
 ### Dependencies
 - Python: 3.5.2
+- gunicorn: 19.9.0
 - flask: 1.0.2
 - flask-uploads: 0.2.1
 - pytorch: 0.4.0
@@ -30,5 +31,9 @@ state.dict.download.url | The URL where the application can download a model sta
 ## Running the App
 - Execute `python app.py`
 
+## Server Setup
+See
+
 ## TODO
-- Improve C3 graphs
+- Add asychronous calling of classifier & graph loading after initial page load
+- Improve C3 graph style

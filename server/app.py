@@ -10,7 +10,7 @@ from os import path
 from flask import Flask, flash, jsonify, render_template, request
 from torch import nn
 
-from server.flower_neural_net import Network, NetworkArchitectures
+from flower_neural_net import Network, NetworkArchitectures
 
 # Load Configuration
 app_config = configparser.ConfigParser()

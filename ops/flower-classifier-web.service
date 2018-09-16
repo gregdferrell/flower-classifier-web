@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve flower-classifier-web
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/flower-classifier-web/server
+Environment="PATH=/home/ubuntu/flower-classifier-web/env/bin"
+ExecStart=/home/ubuntu/flower-classifier-web/env/bin/gunicorn --bind unix:flower-classifier-web.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
