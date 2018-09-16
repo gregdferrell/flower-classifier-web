@@ -9,3 +9,4 @@ server/app_config.ini
 
 # Other
 server/__pycache__
+env
