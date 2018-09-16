@@ -59,9 +59,9 @@ def flower_categories():
 def classify_test_images():
 	# Get and validate request param: number of images
 	num_images = request.args.get('images', 3, type=int)
-	if num_images > 10:
-		flash('Number of images cannot exceed 10', 'warning')
-		num_images = 10
+	if num_images > 5:
+		flash('Number of images cannot exceed 5', 'warning')
+		num_images = 5
 
 	# Get and validate request param: number of predictions
 	num_predictions = request.args.get('predictions', 5, type=int)
