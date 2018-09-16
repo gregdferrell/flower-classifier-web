@@ -32,7 +32,7 @@ state.dict.download.url | The URL where the application can download a model sta
 - Execute `python app.py`
 
 ## Server Setup
-See
+See [ops/server-setup.md](ops/server-setup.md) for instructions on how to serve this application using Gunicorn and Nginx on Ubuntu 16.04.
 
 ## TODO
 - Add asychronous calling of classifier & graph loading after initial page load
