@@ -8,6 +8,11 @@ server {
     listen 80;
     server_name [YOUR-SERVER-IP];
 
+    location ^~ /static/ {
+        include /etc/nginx/mime.types;
+        root /home/ubuntu/flower-classifier-web/server/;
+    }
+
     location / {
         include proxy_params;
         proxy_pass http://unix:/home/ubuntu/flower-classifier-web/flower-classifier-web.sock;
