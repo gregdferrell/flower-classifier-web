@@ -25,7 +25,7 @@ CHECKPOINT_DOWNLOAD_PATH = app_config['DEFAULT']['state.dict.download.url']
 # Configure Flask
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024  # 1024KB, ~1MB
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 3  # 1024KB * 3, ~3MB
 
 # Load the network from the checkpoint
 nw = Network(arch=NetworkArchitectures.VGG13,

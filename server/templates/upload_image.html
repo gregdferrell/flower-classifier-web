@@ -28,7 +28,7 @@
                     </div>
 
                     <div>
-                        <small class="form-text text-muted">Image must be a jpg and cannot exceed 1 MB.</small>
+                        <small class="form-text text-muted">Image must be a jpg and cannot exceed 3 MBs.</small>
                     </div>
 
                     <div class="row flower-item-section">
@@ -39,6 +39,7 @@
                             <div id="error-classify" class="flash-section alert alert-danger" role="alert" style="display: none;">
                                 Error classifying image.
                             </div>
+                            <div id="loading" class="loading" style="display: none"><img src="{{ url_for('static', filename='img/loading.gif') }}"></div>
                             <div id="chart" class="chart"></div>
                         </div>
                     </div>
@@ -61,17 +62,16 @@
 		$(document).ready(function () {
 			$("#image-upload").change(function () {
 				$("#image-show").hide();
-                $("#error-classify").hide();
+				$("#error-classify").hide();
 				$("#chart").hide();
 
 				let file = this.files[0];
-				if (file == null || file.size > 1024 * 1024) { // 1024KB, ~1MB
-					alert('Max file size allowed is 1MB.');
-                    return;
+				if (file == null || file.size > 1024 * 1024 * 3) { // 1024KB * 3, ~1MB
+					alert('Max file size allowed is 3MB.');
+					return;
 				}
 
 				showImage(this);
-				$("#image-show").show();
 
 				$.ajax({
 					type: 'POST',
@@ -80,7 +80,11 @@
 					cache: false,
 					contentType: false,
 					processData: false,
+					beforeSend: function () {
+						$('#loading').show();
+					},
 					success: function (result) {
+						$('#loading').hide();
 						if (result) {
 							console.log('Successfully classified image.');
 							classificationSuccess(result);
@@ -89,6 +93,7 @@
 						}
 					},
 					error: function (jqXHR, textStatus, errorThrown) {
+						$('#loading').hide();
 						classificationFailure();
 					}
 				});
@@ -103,6 +108,8 @@
 					document.getElementById('image-show').src = e.target.result;
 				};
 				reader.readAsDataURL(input.files[0]);
+
+				$("#image-show").show();
 			}
 		}
 
@@ -114,7 +121,7 @@
 		}
 
 		function classificationFailure() {
-            $("#error-classify").show();
-        }
+			$("#error-classify").show();
+		}
     </script>
 {% endblock %}
