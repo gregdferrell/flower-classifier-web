@@ -22,8 +22,8 @@
                         flower images from our test dataset.</p>
                     <p>Or, <a href="{{ url_for('get_upload_image') }}">upload your own image</a>, and see what our classifier thinks.</p>
                 </div>
-                <div class="col-md-4">
-                    <img class="flower-image w300" src="{{ url_for('static', filename=file) }}" alt="Flower Test Image" title="Flower Test Image">
+                <div class="col-md-4 text-center">
+                    <img class="flower-image" src="{{ url_for('static', filename=file) }}" alt="Flower Test Image" title="Flower Test Image">
                 </div>
             </div>
 

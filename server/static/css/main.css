@@ -19,6 +19,7 @@
 	background-size: cover;
 	border-radius: 4px;
 	display: inline-block;
+	width: 90%;
 }
 
 .flower-image-section {
@@ -80,14 +81,6 @@
 	text-align: center;
 }
 
-.w400 {
-	width: 400px;
-}
-
-.w300 {
-	width: 300px;
-}
-
 /*               */
 /*               */
 /* MEDIA QUERIES */
@@ -96,7 +89,6 @@
 
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
-
 }
 
 /* Medium devices (tablets, 768px and up) */
@@ -113,10 +105,8 @@
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
-
 }
 
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-
 }

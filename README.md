@@ -38,5 +38,5 @@ state.dict.download.url | The URL where the application can download a model sta
 See [ops/README.md](ops/README.md) for instructions on how to serve this application using Gunicorn and Nginx on Ubuntu 16.04.
 
 ## TODO
-- Add asychronous calling of classifier & graph loading after initial page load
+- Add asychronous calling of classifier & graph loading after initial page load to test images page
 - Improve C3 graph style
