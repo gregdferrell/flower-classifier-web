@@ -66,7 +66,7 @@
 				$("#chart").hide();
 
 				let file = this.files[0];
-				if (file == null || file.size > 1024 * 1024 * 3) { // 1024KB * 3, ~1MB
+				if (file == null || file.size > 1024 * 1024 * 3) { // 1024KB * 3, ~3MB
 					alert('Max file size allowed is 3MB.');
 					return;
 				}
