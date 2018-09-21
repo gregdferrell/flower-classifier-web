@@ -1,9 +1,3 @@
-#
-# Nginx Configuration File
-#
-# Copy to /etc/nginx/sites-available/flower-classifier-web
-#
-
 server {
     listen 80;
     server_name [YOUR-SERVER-IP];
@@ -15,6 +9,6 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/ubuntu/flower-classifier-web/flower-classifier-web.sock;
+        proxy_pass http://unix:/home/ubuntu/flower-classifier-web/server/flower-classifier-web.sock;
     }
 }
