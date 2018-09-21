@@ -30,24 +30,20 @@ sudo pip3 install virtualenv
 
 #### Create Project Dir & Virtual Env
 ```
-cd ~
-git clone https://github.com/gregdferrell/flower-classifier-web.git
-cd flower-classifier-web
-virtualenv env
-source env/bin/activate
-pip install -r server/requirements.txt
+git clone https://github.com/gregdferrell/flower-classifier-web.git ~/flower-classifier-web
+virtualenv ~/flower-classifier-web/env
+source ~/flower-classifier-web/env/bin/activate
+pip install -r ~/flower-classifier-web/server/requirements.txt
 deactivate
 ```
 
 #### Configure Project
 ```
-cd ~/flower-classifier-web/server
-
 # Download checkpoint file or configure your app_config.ini to download it
-sudo wget [YOUR-DOWNLOAD-URL]
+sudo wget -O ~/flower-classifier-web/server/checkpoint.pth [YOUR-DOWNLOAD-URL]
 
-cp app_config_template.ini app_config.ini
-vi app_config.ini
+cp ~/flower-classifier-web/server/app_config_template.ini ~/flower-classifier-web/server/app_config.ini
+vi ~/flower-classifier-web/server/app_config.ini
     state.dict.file.path = checkpoint.pth
     state.dict.download.url = [YOUR-DOWNLOAD-URL]
 ```
@@ -60,16 +56,14 @@ sudo chown -R ubuntu:www-data ~/flower-classifier-web
 
 #### Setup Gunicorn to Server Your App on Startup
 ```
-cd ~/flower-classifier-web
-
-sudo cp ops/flower-classifier-web.service /etc/systemd/system/flower-classifier-web.service
+sudo cp ~/flower-classifier-web/ops/flower-classifier-web.service /etc/systemd/system/flower-classifier-web.service
 sudo systemctl start flower-classifier-web
 sudo systemctl enable flower-classifier-web
 ```
 
 #### Setup Nginx Reverse Proxy
 ```
-sudo cp ops/flower-classifier-web-nginx /etc/nginx/sites-available/flower-classifier-web
+sudo cp ~/flower-classifier-web/ops/flower-classifier-web-nginx /etc/nginx/sites-available/flower-classifier-web
 sudo vi /etc/nginx/sites-available/flower-classifier-web
     -- Replace [YOUR-SERVER-IP]
 
